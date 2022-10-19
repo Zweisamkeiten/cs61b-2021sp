@@ -113,6 +113,28 @@ public class Model extends Observable {
         // TODO: Modify this.board (and perhaps this.score) to account
         // for the tilt to the Side SIDE. If the board changed, set the
         // changed local variable to true.
+        this.board.setViewingPerspective(side);
+        int target = this.board.size() - 1;
+        for (int column = 0; column < this.board.size(); column++) {
+            for (int row = this.board.size() - 1; row >= 0; row--) {
+                Tile theTile;
+                if ((theTile = this.board.tile(column, row)) != null) {
+                    if (this.board.tile(column, target) != null && this.board.tile(column, target).value() != theTile.value()) {
+                        target--;
+                    }
+                    if (row != target) {
+                        changed = true;
+                    }
+                    if(this.board.move(column, target, theTile)) {
+                        this.score += this.board.tile(column, target).value();
+                        target--;
+                        changed = true;
+                    };
+                }
+            }
+            target = this.board.size() - 1;
+        }
+        this.board.setViewingPerspective(Side.NORTH);
 
         checkGameOver();
         if (changed) {
