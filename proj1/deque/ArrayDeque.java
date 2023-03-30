@@ -61,7 +61,6 @@ public class ArrayDeque<T> implements Deque<T> {
      *
      * @return T
      */
-    @Override
     public T getFirst() {
         return items[indexForward(nextFirst)];
     }
@@ -79,11 +78,10 @@ public class ArrayDeque<T> implements Deque<T> {
         nextLast = indexForward(nextLast);
     }
 
-    @Override
     public T getLast() {
         return items[indexBackward(nextLast)];
     }
-    
+
     /**
      * return list size.
      *

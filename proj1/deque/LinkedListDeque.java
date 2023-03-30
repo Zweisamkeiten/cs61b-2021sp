@@ -47,12 +47,10 @@ public class LinkedListDeque<T> implements Deque<T> {
      *
      * @return T
      */
-    @Override
     public T getFirst() {
         return sentinel.next.item;
     }
 
-    @Override
     public T getLast() {
         return sentinel.prev.item;
     }
@@ -67,7 +65,7 @@ public class LinkedListDeque<T> implements Deque<T> {
         sentinel.prev = newNode;
         size += 1;
     }
-    
+
     /**
      * return list size.
      *
