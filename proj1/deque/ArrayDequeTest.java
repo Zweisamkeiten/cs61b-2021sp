@@ -4,11 +4,11 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-
 /**
  * Performs some basic linked list tests.
  */
 public class ArrayDequeTest {
+
 
     @Test
     /** Adds a few things to the list, checking isEmpty() and size() are correct,
@@ -153,5 +153,33 @@ public class ArrayDequeTest {
         for (int i : adeque) {
             System.out.println(i);
         }
+    }
+
+    @Test
+    public void resizingCauseNulls() {
+        ArrayDeque<Integer> d = new ArrayDeque<>();
+        for (int i = 0; i < 20; i++) {
+            d.addLast(i);
+        }
+        assertNotNull(d.removeFirst());
+        assertNotNull(d.removeLast());
+        d.removeFirst();
+        d.removeFirst();
+        d.removeFirst();
+        d.removeFirst();
+        d.removeFirst();
+        d.removeFirst();
+        d.removeFirst();
+        d.removeFirst();
+        d.removeFirst();
+        d.removeFirst();
+        d.removeFirst();
+        d.removeFirst();
+        d.removeFirst();
+        d.removeFirst();
+        d.removeFirst();
+        d.removeFirst();
+        d.removeFirst();
+        d.removeFirst();
     }
 }

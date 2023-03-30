@@ -55,18 +55,17 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
     private void resize(int capacity) {
         T[] a = (T[]) new Object[capacity];
 
-        for (int i = 0; i <= nextLast; i++) {
-            a[i] = items[i];
-        }
+        int idx = indexForward(nextFirst);
+        int i = 0;
+        do {
+            a[i++] = items[idx];
+            idx = indexForward(idx);
+        } while (idx != nextLast);
 
-        for (int i = nextFirst; i < amount; i++) {
-            a[i] = items[i];
-        }
-
-        items = a;
-        nextFirst = capacity - (amount - nextFirst);
+        nextLast = i;
         amount = capacity;
-        nextLast = indexForward(nextLast);
+        nextFirst = capacity - 1;
+        items = a;
     }
 
     @Override
@@ -76,9 +75,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
         }
         size += 1;
         items[nextFirst] = item;
-        if (nextFirst != nextLast) {
-            nextFirst = indexBackward(nextFirst);
-        }
+        nextFirst = indexBackward(nextFirst);
     }
 
     /**
@@ -91,9 +88,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
         }
         size += 1;
         items[nextLast] = item;
-        if (nextLast != nextFirst) {
-            nextLast = indexForward(nextLast);
-        }
+        nextLast = indexForward(nextLast);
     }
 
     /**
@@ -115,6 +110,13 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
         }
     }
 
+    private boolean usageUnderPercent25() {
+        if (amount >= 16) {
+            return size / (double) amount * 100 < 25;
+        }
+        return false;
+    }
+
     @Override
     public T removeFirst() {
         if (size == 0) {
@@ -125,6 +127,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
         items[toRemoveidx] = null;
         size -= 1;
         nextFirst = indexForward(nextFirst);
+        if (usageUnderPercent25()) resize(amount / 2);
         return res;
     }
 
@@ -137,6 +140,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
         items[toRemoveidx] = null;
         size -= 1;
         nextLast = indexBackward(nextLast);
+        if (usageUnderPercent25()) resize(amount / 2);
         return res;
     }
 
