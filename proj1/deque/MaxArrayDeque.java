@@ -28,14 +28,14 @@ public class MaxArrayDeque<T> extends ArrayDeque<T> {
         if (size() == 0) {
             return null;
         }
-        T retMax = getFirst();
-        for (int i = 0; i < size(); i++) {
+        T retMax = get(0);
+        for (int i = 1; i < size(); i++) {
             T cur = get(i);
 
             if (cur == null) {
                 continue;
             }
-            
+
             if (c.compare(retMax, cur) < 0) {
                 retMax = cur;
             }

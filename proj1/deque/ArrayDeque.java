@@ -15,8 +15,8 @@ public class ArrayDeque<T> implements Deque<T> {
         items = (T[]) new Object[INITIAL_SIZE];
         size = 0;
         amount = INITIAL_SIZE;
-        nextFirst = 4;
-        nextLast = 5;
+        nextFirst = 7;
+        nextLast = 0;
     }
 
     private int indexForward(int idx) {
