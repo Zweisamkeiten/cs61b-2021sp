@@ -3,7 +3,7 @@ package deque;
 public class LinkedListDeque<T> implements Deque<T> {
     public class Node {
         private Node prev;
-        public T item;
+        private T item;
         private Node next;
 
         public Node(Node pre, T i, Node n) {
@@ -123,18 +123,18 @@ public class LinkedListDeque<T> implements Deque<T> {
         return p.item;
     }
 
-    private T getRecursive_Helper(Node cur, int index) {
+    private T getRecursiveHelper(Node cur, int index) {
         if (index == 0) {
             return cur.item;
         }
 
-        return getRecursive_Helper(cur.next, index - 1);
+        return getRecursiveHelper(cur.next, index - 1);
     }
 
     public T getRecursive(int index) {
         if (index > size - 1) {
             return null;
         }
-        return getRecursive_Helper(sentinel.next, index);
+        return getRecursiveHelper(sentinel.next, index);
     }
 }
