@@ -121,4 +121,18 @@ public class ArrayDequeTest {
         }
 
     }
+
+    @Test
+    /* Test iterator. */
+    public void iteratorTest() {
+        ArrayDeque<Integer> adeque = new ArrayDeque<>();
+        adeque.addLast(5);
+        adeque.addLast(23);
+        adeque.addLast(42);
+
+        //iteration
+        for (int i : adeque) {
+            System.out.println(i);
+        }
+    }
 }

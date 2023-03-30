@@ -1,12 +1,37 @@
 package deque;
 
-public class ArrayDeque<T> implements Deque<T> {
+import java.util.Iterator;
+
+public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
     private T[] items;
     private int size;
     private int nextFirst;
     private int nextLast;
     private static final int INITIAL_SIZE = 8;
     private int amount;
+
+    private class ArrayDequeIterator implements Iterator<T> {
+        private int idx;
+
+        public ArrayDequeIterator() {
+            idx = 0;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return idx < size;
+        }
+
+        @Override
+        public T next() {
+            T ret = items[idx++];
+            return ret;
+        }
+    }
+
+    public Iterator<T> iterator() {
+        return new ArrayDequeIterator();
+    }
 
     /**
      * Creates an empty list.

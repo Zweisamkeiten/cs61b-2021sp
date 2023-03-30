@@ -138,4 +138,18 @@ public class LinkedListDequeTest {
         }
 
     }
+
+    @Test
+    /* Test iterator. */
+    public void iteratorTest() {
+        LinkedListDeque<Integer> ldeque = new LinkedListDeque<>();
+        ldeque.addLast(5);
+        ldeque.addLast(23);
+        ldeque.addLast(42);
+
+        //iteration
+        for (int i : ldeque) {
+            System.out.println(i);
+        }
+    }
 }
