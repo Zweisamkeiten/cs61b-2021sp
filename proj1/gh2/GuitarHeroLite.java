@@ -10,6 +10,8 @@ public class GuitarHeroLite {
     public static final String keyboard = "q2wf4p5gj7l8u9y;-[=zxsctvdbkjme,.o/' ";
     public static final double CONCERT = 440.0;
 
+    public static final double CONCERT_A = 440.0;
+
     public static void main(String[] args) {
         GuitarString[] strings = new GuitarString[keyboard.length()];
         for (int i = 0; i < keyboard.length(); i++) {
