@@ -13,11 +13,10 @@ public class ArrayDequeTest {
     @Test
     /** Adds a few things to the list, checking isEmpty() and size() are correct,
      * finally printing the results.
-     *
      * && is the "and" operation. */
     public void addIsEmptySizeTest() {
 
-        ArrayDeque<String> lld1 = new ArrayDeque<String>();
+        Deque<String> lld1 = new ArrayDeque<String>();
 
         assertTrue("A newly initialized LLDeque should be empty", lld1.isEmpty());
         lld1.addFirst("front");
@@ -41,7 +40,7 @@ public class ArrayDequeTest {
     /** Adds an item, then removes an item, and ensures that dll is empty afterwards. */
     public void addRemoveTest() {
 
-        ArrayDeque<Integer> lld1 = new ArrayDeque<>();
+        Deque<Integer> lld1 = new ArrayDeque<>();
         // should be empty
         assertTrue("lld1 should be empty upon initialization", lld1.isEmpty());
 
@@ -58,7 +57,7 @@ public class ArrayDequeTest {
     /* Tests removing from an empty deque */
     public void removeEmptyTest() {
 
-        ArrayDeque<Integer> lld1 = new ArrayDeque<>();
+        Deque<Integer> lld1 = new ArrayDeque<>();
         lld1.addFirst(3);
 
         lld1.removeLast();
@@ -78,9 +77,9 @@ public class ArrayDequeTest {
     /* Check if you can create LinkedListDeques with different parameterized types*/
     public void multipleParamTest() {
 
-        ArrayDeque<String> lld1 = new ArrayDeque<>();
-        ArrayDeque<Double> lld2 = new ArrayDeque<>();
-        ArrayDeque<Boolean> lld3 = new ArrayDeque<>();
+        Deque<String> lld1 = new ArrayDeque<>();
+        Deque<Double> lld2 = new ArrayDeque<>();
+        Deque<Boolean> lld3 = new ArrayDeque<>();
 
         lld1.addFirst("string");
         lld2.addFirst(3.14159);
@@ -95,7 +94,7 @@ public class ArrayDequeTest {
     /* check if null is return when removing from an empty LinkedListDeque. */
     public void emptyNullReturnTest() {
 
-        ArrayDeque<Integer> lld1 = new ArrayDeque<>();
+        Deque<Integer> lld1 = new ArrayDeque<>();
 
         boolean passed1 = false;
         boolean passed2 = false;
@@ -108,7 +107,7 @@ public class ArrayDequeTest {
     /* Add large number of elements to deque; check if order is correct. */
     public void bigLLDequeTest() {
 
-        ArrayDeque<Integer> lld1 = new ArrayDeque<>();
+        Deque<Integer> lld1 = new ArrayDeque<>();
         for (int i = 0; i < 1000000; i++) {
             lld1.addLast(i);
         }
