@@ -123,6 +123,25 @@ public class ArrayDequeTest {
     }
 
     @Test
+    /* Add large number of elements to deque; check if order is correct. */
+    public void bigLLDequegetTest() {
+
+        Deque<Integer> lld1 = new ArrayDeque<>();
+        for (int i = 0; i < 1000000; i++) {
+            lld1.addLast(i);
+        }
+
+        for (int i = 0; i < 500000; i++) {
+            assertEquals("Should have the same value", i, (double) lld1.get(i), 0.0);
+        }
+
+        for (int i = 999999; i > 500000; i--) {
+            assertEquals("Should have the same value", i, (double) lld1.get(i), 0.0);
+        }
+
+    }
+
+    @Test
     /* Test iterator. */
     public void iteratorTest() {
         ArrayDeque<Integer> adeque = new ArrayDeque<>();

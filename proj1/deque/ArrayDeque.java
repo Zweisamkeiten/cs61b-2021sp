@@ -13,7 +13,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
     private class ArrayDequeIterator implements Iterator<T> {
         private int idx;
 
-        public ArrayDequeIterator() {
+        ArrayDequeIterator() {
             idx = 0;
         }
 
@@ -54,21 +54,19 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
 
     private void resize(int capacity) {
         T[] a = (T[]) new Object[capacity];
-        int idx = indexForward(nextFirst);
 
-        while (idx != 0) {
-            a[capacity - (amount - idx)] = items[idx];
-            idx = indexForward(idx);
+        for (int i = 0; i <= nextLast; i++) {
+            a[i] = items[i];
         }
 
-        while (idx != nextLast) {
-            a[idx] = items[idx];
-            idx = indexForward(idx);
+        for (int i = nextFirst; i < amount; i++) {
+            a[i] = items[i];
         }
 
         items = a;
-        nextFirst = ((capacity - (amount - idx)) + capacity - 1) % capacity;
+        nextFirst = capacity - (amount - nextFirst);
         amount = capacity;
+        nextLast = indexForward(nextLast);
     }
 
     @Override
@@ -78,16 +76,9 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
         }
         size += 1;
         items[nextFirst] = item;
-        nextFirst = indexBackward(nextFirst);
-    }
-
-    /**
-     * get the first item.
-     *
-     * @return T
-     */
-    public T getFirst() {
-        return items[indexForward(nextFirst)];
+        if (nextFirst != nextLast) {
+            nextFirst = indexBackward(nextFirst);
+        }
     }
 
     /**
@@ -100,11 +91,9 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
         }
         size += 1;
         items[nextLast] = item;
-        nextLast = indexForward(nextLast);
-    }
-
-    public T getLast() {
-        return items[indexBackward(nextLast)];
+        if (nextLast != nextFirst) {
+            nextLast = indexForward(nextLast);
+        }
     }
 
     /**
@@ -151,23 +140,34 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
         return res;
     }
 
-    private boolean indexWithinArr(int idx) {
-        if (nextFirst < nextLast) {
-            return idx > nextFirst && idx < nextLast;
-        } else {
-            return idx < nextLast || idx > nextFirst;
-        }
-    }
-
     @Override
     public T get(int index) {
         if (index > size - 1) {
             return null;
         }
+        int idx = index % items.length;
+        return items[idx];
+    }
 
-        if (indexWithinArr(index)) {
-            return items[index];
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
         }
-        return null;
+        if (other == null) {
+            return false;
+        } else if (other instanceof Deque<?>) {
+            Deque castedOther = (Deque) other;
+            if (this.size != castedOther.size()) {
+                return false;
+            }
+            for (int i = 0; i < size; i++) {
+                if (!get(i).equals(castedOther.get(i))) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        return false;
     }
 }

@@ -124,22 +124,6 @@ public class LinkedListDequeTest {
     }
 
     @Test
-    /* check if null is return when removing from an empty LinkedListDeque. */
-    public void getLastTest() {
-
-        LinkedListDeque<Integer> lld1 = new LinkedListDeque<Integer>();
-        for (int i = 0; i < 10; i++) {
-            lld1.addLast(i);
-        }
-
-        for (int i = 9; i >= 0; i--) {
-            assertEquals(i, (int) lld1.getLast());
-            lld1.removeLast();
-        }
-
-    }
-
-    @Test
     /* Test iterator. */
     public void iteratorTest() {
         LinkedListDeque<Integer> ldeque = new LinkedListDeque<>();
