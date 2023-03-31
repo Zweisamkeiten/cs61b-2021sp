@@ -127,7 +127,9 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
         items[toRemoveidx] = null;
         size -= 1;
         nextFirst = indexForward(nextFirst);
-        if (usageUnderPercent25()) resize(amount / 2);
+        if (usageUnderPercent25()) {
+            resize(amount / 2);
+        }
         return res;
     }
 
@@ -140,7 +142,9 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
         items[toRemoveidx] = null;
         size -= 1;
         nextLast = indexBackward(nextLast);
-        if (usageUnderPercent25()) resize(amount / 2);
+        if (usageUnderPercent25()) {
+            resize(amount / 2);
+        }
         return res;
     }
 
@@ -149,7 +153,8 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
         if (index > size - 1) {
             return null;
         }
-        int idx = index % items.length;
+        int idx = index % size;
+        idx = (indexForward(nextFirst) + idx) % size;
         return items[idx];
     }
 

@@ -177,9 +177,8 @@ public class ArrayDequeTest {
         d.removeFirst();
         d.removeFirst();
         d.removeFirst();
-        d.removeFirst();
-        d.removeFirst();
-        d.removeFirst();
-        d.removeFirst();
+
+        d.addFirst(0);
+        assertNotNull(d.get(0));
     }
 }
