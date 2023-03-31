@@ -154,7 +154,8 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
             return null;
         }
         int idx = index % size;
-        idx = (indexForward(nextFirst) + idx) % size;
+        int first = indexForward(nextFirst);
+        idx = (first + idx) % items.length;
         return items[idx];
     }
 

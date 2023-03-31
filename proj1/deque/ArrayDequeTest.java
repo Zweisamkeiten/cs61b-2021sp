@@ -179,6 +179,21 @@ public class ArrayDequeTest {
         d.removeFirst();
 
         d.addFirst(0);
+        d.addLast(1);
         assertNotNull(d.get(0));
+    }
+
+    @Test
+    public void resizingCauseNulls2() {
+        ArrayDeque<Integer> d = new ArrayDeque<>();
+        d.addFirst(0);
+        assertEquals(0, (int) d.removeLast());
+        d.addLast(2);
+        d.addLast(3);
+        d.addFirst(4);
+        d.addFirst(5);
+        assertEquals(3, (int) d.removeLast());
+        assertEquals(5, (int) d.removeFirst());
+        assertEquals(2, (int) d.get(1));
     }
 }
