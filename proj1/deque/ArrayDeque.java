@@ -24,7 +24,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
 
         @Override
         public T next() {
-            T ret = items[idx++];
+            T ret = get(idx++);
             return ret;
         }
     }
